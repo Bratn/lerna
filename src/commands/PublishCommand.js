@@ -120,10 +120,9 @@ export default class PublishCommand extends Command {
 
       if (publishDirectoryPackage) {
         if (pkg.name !== publishDirectoryPackage.name || pkg.version !== publishDirectoryPackage.version) {
-          const message = "Package " + pkg.name + " version is " + pkg.name + "@" + pkg.version + " "
-            + "doesn't match version of the custom publish 'package.json' file "
-            + pkg.publishDirectoryPackage.name + " version is " + pkg.publishDirectoryPackage.name
-            + "@" + pkg.version;
+          const message = "Package " + pkg.name + ": The 'package.json' in custom publish folder contains invalid name or version. Expected:" + pkg.name + "@" + pkg.version + " "
+            + ", got: " + publishDirectoryPackage.name + "@" + publishDirectoryPackage.version
+            + ". try running lerna build again.";
           this.logger.error(message);
           throw new Error(message);
         }
